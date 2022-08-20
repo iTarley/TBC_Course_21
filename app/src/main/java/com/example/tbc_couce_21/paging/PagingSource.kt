@@ -21,9 +21,10 @@ class PagingSource(private val retrofitClient: RetrofitClient):PagingSource<Int,
 
         return try{
             val position = params.key ?: 1
-            val response = retrofitClient.getInfo(position,6)
+            val response = retrofitClient.getInfo(position)
             Log.d("response", "load: ${response.body()?.data}")
-            LoadResult.Page(data = response.body()!!.data, prevKey = if (position == 1) null else position -1,nextKey = position + 1 )
+            LoadResult.Page(data = response.body()!!.data, prevKey = if (position == 1) null else position - 1,
+                nextKey = if (position == 2) null else position + 1)
         }catch (e:Exception){
             LoadResult.Error(e)
         }

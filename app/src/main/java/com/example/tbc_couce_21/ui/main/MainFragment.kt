@@ -19,6 +19,7 @@ import com.example.tbc_couce_21.paging.PagerAdapter
 import com.example.tbc_couce_21.paging.PagingData
 import com.example.tbc_couce_21.viewModel.MainViewModel
 import com.example.tbc_couce_21.viewModel.MainViewModelFactory
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -41,21 +42,32 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel()
+        initRecycler()
+        loadStateListener()
+
+
+    }
+
+    private fun viewModel() {
         val service = RetrofitClient.invoke()
         val rep = PagingData(service)
         val factory = MainViewModelFactory(rep)
 
         viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
-        binding.recyclerview.adapter = adapter
+    }
+
+    private fun loadStateListener() {
         adapter.addLoadStateListener { loadState ->
             if (loadState.refresh is LoadState.Loading ||
-                loadState.append is LoadState.Loading)
+                loadState.append is LoadState.Loading
+            )
                 binding.progressDialog.isVisible = true
             else {
                 binding.progressDialog.isVisible = false
                 val errorState = when {
                     loadState.append is LoadState.Error -> loadState.append as LoadState.Error
-                    loadState.prepend is LoadState.Error ->  loadState.prepend as LoadState.Error
+                    loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
                     loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
                     else -> null
                 }
@@ -65,20 +77,16 @@ class MainFragment : Fragment() {
 
             }
         }
+    }
 
+    private fun initRecycler() {
+        binding.recyclerview.adapter = adapter
         lifecycleScope.launch {
-            viewModel.getMovieList().collectLatest {
+            viewModel.getMovieList().collect {
                 adapter.submitData(it)
             }
         }
-
-
-
     }
-
-
-
-
 
 
     override fun onDestroyView() {

@@ -1,13 +1,10 @@
 package com.example.tbc_couce_21.paging
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.Pager
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.example.tbc_couce_21.databinding.GridViewBinding
 import com.example.tbc_couce_21.models.Data

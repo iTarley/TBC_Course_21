@@ -2,7 +2,6 @@ package com.example.tbc_couce_21.models
 
 import com.squareup.moshi.Json
 
-const val NETWORK_PAGE_SIZE = 6
 
 data class InfoModel(
     val page: Int?,

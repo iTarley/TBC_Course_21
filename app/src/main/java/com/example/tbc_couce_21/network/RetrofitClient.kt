@@ -15,7 +15,7 @@ interface RetrofitClient {
 
 
     @GET("users")
-    suspend fun getInfo(@Query("page") page: Int,@Query("per_page") perPage:Int ): Response<InfoModel>
+    suspend fun getInfo(@Query("page") page: Int): Response<InfoModel>
 
     companion object {
 
