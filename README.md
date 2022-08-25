@@ -25,10 +25,13 @@ ex. Luka Nikuradze - luka.nikuradze.1@btu.edu.ge
 
 
 ## Version History
-* 1.1 (20.08.2022)
+* 1.1.1 (25.08.2022)
+    * Bug fix
+    
+* 1.1.0 (20.08.2022)
     * Initial Release
     
-* 1.0 (19.08.2022)
+* 1.0.0 (19.08.2022)
     * first commit
 
 
