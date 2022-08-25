@@ -34,7 +34,7 @@ class PagerAdapter:PagingDataAdapter<Data,com.example.tbc_couce_21.paging.PagerA
 
         private lateinit var currentCard: Data
         fun bind(){
-            currentCard = getItem(adapterPosition)!!
+            currentCard = getItem(bindingAdapterPosition)!!
 
             binding.apply {
                 Glide.with(this.root).load(currentCard.avatar).into(imageuser)
